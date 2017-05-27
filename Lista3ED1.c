@@ -1,5 +1,5 @@
 
-/*Escreva uma função que realiza a inserção ordenada de uma nova chave na lista P. */
+/*Escreva uma funÃ§Ã£o que realiza a inserÃ§Ã£o ordenada de uma nova chave na lista P. */
 
 No* insere_ordenado(No *lista, int n){
 
@@ -25,7 +25,7 @@ No* insere_ordenado(No *lista, int n){
 
 ###############################################################
 
-/*Escreva uma função que remove o k-ésimo nó da lista encadeada P.*/
+/*Escreva uma funÃ§Ã£o que remove o k-Ã©simo nÃ³ da lista encadeada P.*/
 
 No* insere_ordenado(No *lista, int n){
 
@@ -52,6 +52,8 @@ No* insere_ordenado(No *lista, int n){
 
 }
 
+###############################################################
+
 No* remover(No* lista, int y){
     No* p = lista;
     No* ant;
@@ -61,7 +63,7 @@ No* remover(No* lista, int y){
         printf("Primeiro elemento da lista removido\n");
         return p;
     }
-    printf("Não e o 1 da lista\n");
+    printf("NÃ£o e o 1 da lista\n");
 
     No* inicio = p;
 
@@ -80,8 +82,8 @@ No* remover(No* lista, int y){
 
 ###############################################################
 
-/*Escreva uma função que remove um elemento com chave K da lista ordenada.
-Caso K não pertença à lista, uma mensagem de erro deve ser exibida*/
+/*Escreva uma funÃ§Ã£o que remove um elemento com chave K da lista ordenada.
+Caso K nÃ£o pertenÃ§a Ã  lista, uma mensagem de erro deve ser exibida*/
 
 No* remover(No* lista, int y){
     No* p = lista;
@@ -106,8 +108,8 @@ No* remover(No* lista, int y){
 }
 
 ###############################################################
-/*Escreva uma função que recebe duas listas ligadas ordenadas
-x = (x1 , ..., xn) e y = (y1, . . . ,ym) como parâmetros e retorna
+/*Escreva uma funÃ§Ã£o que recebe duas listas ligadas ordenadas
+x = (x1 , ..., xn) e y = (y1, . . . ,ym) como parÃ¢metros e retorna
 uma lista ordenada formada pelos elementos de x e y intercalados.
 Seu algoritmo deve ter complexidade de tempo O(n).*/
 
@@ -176,7 +178,7 @@ int crescente(Lista* l){
     Lista* p=l;
     Lista* r=p->prox;
 
-    while(r != NULL){ /* R CHEGARA PRIMEIRO A NULL POIS É UM ELEMENTO A FRENTE*/
+    while(r != NULL){ /* R CHEGARA PRIMEIRO A NULL POIS Ã‰ UM ELEMENTO A FRENTE*/
           if((p->n) > (r->n)){
              return 0;
           }
