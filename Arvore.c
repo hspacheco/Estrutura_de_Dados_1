@@ -5,7 +5,7 @@ typedef struct no{
     int n;
     struct no* no_esq;
     struct no* no_dir;
-}No;
+}No;                     /*CRIA ESTRUTURA DA ARVORE*/
 
 No* inicializa(void){
     return NULL;
@@ -14,7 +14,7 @@ No* inicializa(void){
 No* create_tree(int numero){
     No* arv = (No*)malloc(sizeof(No));
     arv->n = numero;
-    arv->no_esq = NULL;
+    arv->no_esq = NULL;   /*PONTEIROS PARA AS SUB-ARVORES APONTAM NULO*/
     arv->no_dir = NULL;
     return arv;
 }
@@ -23,22 +23,36 @@ No* insert_tree(No* Arvore, int n){
     No* tree = Arvore;
 
     if(tree == NULL){
-        tree = create_tree(n);
-    }
+        tree = create_tree(n); //UNICO MOMENTO NO QUAL SERÁ CRIADA UMA NOVA
+    }                          //ARVORE OU SUB ARVORE
 
     if(n > tree->n){
-       tree->no_dir = insert_tree(tree->no_dir,n);
+       tree->no_dir = insert_tree(tree->no_dir,n); /*CHAMADA RECURSIVA PARA SUB-ARVORE DA DIREITA*/
     }
 
     if(n < tree->n){
-       tree->no_esq = insert_tree(tree->no_esq,n);
+       tree->no_esq = insert_tree(tree->no_esq,n); /*CHAMADA RECURSIVA PARA SUB-ARVORE DA ESQUERDA*/
     }
 
     return tree;
 
 }
 
-void print_pre(No* arvore){
+int search_tree(No* arvore, int n){
+    No* p=arvore;
+    if(p=NULL){
+        return 0;
+    }
+    else{
+        return(p->n==n || search_tree(p->no_esq,n) || search_tree(p->no_dir,n));
+        /*ESSA OPERACAO FAZ A SEQUENCIA DE BUSCAS NA ORDEM ESQ-DIR DE FORMA 
+        QUAL A PRIMEIRA OPCAO SERA EXECUTADA DE FORMA RECURSIVA E INTERROMPERA
+        CASO SEJA VERDADEIRA, JA QUE É USADO O OPERADOR LOGICO ||(OU)*/
+    }
+}
+
+
+void print_pre(No* arvore){ /*RAIZ,SAE,SAD*/
      if(arvore != NULL){
         printf("%d ",arvore->n);
         print_pre(arvore->no_esq);
@@ -46,7 +60,7 @@ void print_pre(No* arvore){
      }
 }
 
-void print_pos(No* arvore){
+void print_pos(No* arvore){ /*SAE,SAD,RAIZ*/
      if(arvore != NULL){
         print_pos(arvore->no_esq);
         print_pos(arvore->no_dir);
@@ -54,7 +68,7 @@ void print_pos(No* arvore){
      }
 }
 
-void print_in(No* arvore){
+void print_in(No* arvore){ /*SAE,RAIZ,SAD*/
      if(arvore != NULL){
         print_in(arvore->no_esq);
         printf("%d ",arvore->n);
