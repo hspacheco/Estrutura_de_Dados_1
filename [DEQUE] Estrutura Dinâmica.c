@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*PROBLEMA COM A FUNÇÃO IMPRIMIR DO FIM PARA O COMEÇO*/
+
 typedef struct elem{
   int n;
   struct elem *ant;
@@ -28,7 +30,7 @@ Elem* insere_ini(Elem* l, int x){
   p->n = x;
   p->prox = l;
   p->ant = NULL;
-  if(vazia(l)){
+  if(!vazia(l)){
     l->ant = p;
   }
   return p;
@@ -48,7 +50,7 @@ Elem* insere_fim(Elem* l, int x){
   p->n = x;
   p->ant = l;
   p->prox = NULL;
-  if(vazia(l)){
+  if(!vazia(l)){
     l->prox = l;
   }
   return p;
@@ -106,6 +108,7 @@ void imprime_do_fim(Deque* f){
   for(p=f->fim;p!=NULL;p=p->ant){
     printf("%d ", p->n);
   }
+  printf("\n");
 }
 
 void imprime_do_ini(Deque* f){
@@ -113,6 +116,7 @@ void imprime_do_ini(Deque* f){
   for(p=f->ini;p!=NULL;p=p->prox){
     printf("%d ", p->n);
   }
+  printf("\n");
 }
 
 int main(){
@@ -120,5 +124,22 @@ int main(){
 
   p = inicializa();
   insere_deque_ini(p,9);
+  insere_deque_ini(p,10);
+  insere_deque_ini(p,18);
+  insere_deque_ini(p,50);
+  insere_deque_ini(p,32);
+
+  printf("Começo para o Fim\n");
+  imprime_do_ini(p);
+  printf("Fim para o Começo\n");
+  imprime_do_fim(p);
+
+  printf("Retira do Início\n");
+  deque_retira_ini(p);
+  deque_retira_ini(p);
+  imprime_do_ini(p);
+  printf("Retira do Fim\n");
+  deque_retira_fim(p);
+  imprime_do_fim(p);
 
 }
