@@ -15,7 +15,7 @@ Lista* inicializar (void){
 }
 
 Lista* inserir (Lista* l, int i){ /*insere no inicio*/
-	Lista* novo = (Lista*) malloc (sizeof(Lista)); /*NOVO É A NOVA STRUCT ELEMENTO DA LISTA */
+	Lista* novo = (Lista*) malloc (sizeof(Lista)); /*NOVO Ã‰ A NOVA STRUCT ELEMENTO DA LISTA */
 	novo->n = i;
 	novo->prox = l;
 	return novo;
@@ -82,7 +82,7 @@ int main (){
     imprimir(l);
 
     printf("\nNova lista\n");
-    liberar(l); /*liberar a memória alocada*/
+    liberar(l); /*liberar a memÃ³ria alocada*/
     l = inicializar();
     l = inserir(l,500);
     imprimir(l);
