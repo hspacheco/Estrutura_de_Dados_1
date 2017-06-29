@@ -35,7 +35,7 @@ Elem* remov_ini(Elem* l){ /*CRIA COPIA QUE ASSUME A POSICAO "ABAIXO" DO TOPO*/
     return p;
 }
 
-void push(Pilha* l, int x){ /*INSER_INI DEVOLVE UM APONTADOR PARA O ELEMENTO QUE AGORA É O TOPO DA PILHA*/
+void push(Pilha* l, int x){ /*INSER_INI DEVOLVE UM APONTADOR PARA O ELEMENTO QUE AGORA Ã‰ O TOPO DA PILHA*/
     l->prim = inser_ini(l->prim,x);
 }
 
