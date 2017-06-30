@@ -17,17 +17,17 @@ No* create_tree(int numero){
     arv->no_esq = NULL;   /*PONTEIROS PARA AS SUB-ARVORES APONTAM NULO*/
     arv->no_dir = NULL;
     return arv;
-    
+
 }
 
 No* insert_tree_esq(No* Arvore, int n){
     No* tree = Arvore;
 
     if(tree == NULL){
-        tree = create_tree(n); 
-    }                          
-    
-    else tree->no_esq = insert_tree_esq(tree->no_esq,n); 
+        tree = create_tree(n);
+    }
+
+    else tree->no_esq = insert_tree_esq(tree->no_esq,n);
 
     return tree;
 
@@ -37,10 +37,10 @@ No* insert_tree_dir(No* Arvore, int n){
     No* tree = Arvore;
 
     if(tree == NULL){
-        tree = create_tree(n); 
-    }                          
-    
-    else tree->no_dir = insert_tree_dir(tree->no_dir,n); 
+        tree = create_tree(n);
+    }
+
+    else tree->no_dir = insert_tree_dir(tree->no_dir,n);
 
     return tree;
 
@@ -73,9 +73,6 @@ int search_tree(No* arvore, int n){
     }
     else{
         return(p->n==n || search_tree(p->no_esq,n) || search_tree(p->no_dir,n));
-        /*ESSA OPERACAO FAZ A SEQUENCIA DE BUSCAS NA ORDEM ESQ-DIR DE FORMA 
-        QUAL A PRIMEIRA OPCAO SERA EXECUTADA DE FORMA RECURSIVA E INTERROMPERA
-        CASO SEJA VERDADEIRA, JA QUE É USADO O OPERADOR LOGICO ||(OU)*/
     }
 }
 
@@ -105,36 +102,39 @@ void print_in(No* arvore){ /*SAE,RAIZ,SAD*/
      }
 }
 
-int search_sub_tree(No* arv){
-  int x=3,y=7,z=2;
+int search_sub_tree(No* arv, No* subarv){
+  
   if(arv == NULL){
-    printf("Ta NULO esta bosta");
     return 0;
   }
-  return( (arv->n == x && arv->no_esq->n==y && arv->no_dir->n==z) || search_sub_tree(arv->no_esq) || search_sub_tree(arv->no_dir));
-}
-
-void qntd_sub(No* arv){
-  No* p = arv;
   
-  while(p->no_esq != NULL && p->no_dir != NULL){
-    
+  if((arv->n==subarv->n) && (arv->no_esq->n==subarv->no_esq->n ) && (arv->no_dir->n==subarv->no_dir->n)){
+    return 1;
+  }
+  else{
+    return (search_sub_tree(arv->no_esq,subarv) || search_sub_tree(arv->no_dir,subarv));
   }
 }
 
 
 int main(){
     No* arv;
+    No* subarv;
 
     arv = inicializa();
-    arv = insert_tree_dir(arv,5);
-    arv = insert_tree_dir(arv,8);
-    arv = insert_tree_dir(arv,3);
-    arv = insert_tree_esq(arv,78);
-    arv = insert_tree_esq(arv,31);
+    subarv = inicializa();
+    arv = insert_tree(arv,8);
+    arv = insert_tree(arv,5);
+    arv = insert_tree(arv,12);
+    arv = insert_tree(arv,23);
+    arv = insert_tree(arv,11);
     
-    
-    printf("Pre-Ordem\n");
+    subarv = insert_tree(subarv,12);
+    subarv = insert_tree(subarv,11);
+    subarv = insert_tree(subarv,23);
+
+    printf("\n\n######### MyArvore ########\n");
+    printf("\nPre-Ordem\n");
     print_pre(arv);
     printf("\n");
     printf("Pos-Ordem\n");
@@ -143,8 +143,20 @@ int main(){
     printf("In-Ordem\n");
     print_in(arv);
     printf("\n\n");
-    printf("Resultado da busca (Existe 1 | Nao 0) \n");
+    printf("\nResultado da busca (Existe 1 | Nao 0) \n");
     printf("%d",search_tree(arv,7));
     
-    
+    printf("\n\n######### Sub-Arvore ########\n");
+    printf("\nPre-Ordem\n");
+    print_pre(subarv);
+    printf("\n");
+    printf("Pos-Ordem\n");
+    print_pos(subarv);
+    printf("\n");
+    printf("In-Ordem\n");
+    print_in(subarv);
+    printf("\n\n");
+    printf("\nResultado da busca da Sub-arvore na Arvore (Existe 1 | Nao 0) \n");
+    printf("%d",search_sub_tree(arv,subarv));
+
 }
