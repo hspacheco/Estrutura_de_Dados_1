@@ -128,6 +128,18 @@ No* insert_qlq_no(No* arv,int n){
     }
 }
 
+int arvores_iguais(No* arv1, No* arv2){
+  
+  if(arv1 == NULL && arv2 == NULL ){
+    return 0;
+  }
+  else{
+    return( (arv1->n == arv2->n) && (arvores_iguais(arv1->no_esq,arv1->no_esq)) && (arvores_iguais(arv1->no_dir,arv1->no_dir)) );
+  } 
+  
+}
+
+
 int main(){
     No* arv;
     No* subarv;
