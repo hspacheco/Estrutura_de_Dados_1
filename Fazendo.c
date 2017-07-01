@@ -116,10 +116,22 @@ int search_sub_tree(No* arv, No* subarv){
   }
 }
 
+No* insert_qlq_no(No* arv,int n){
+  
+    if(arv==NULL){
+        return 0;
+    }
+    else{
+        if(arv->n==n || search_tree(arv->no_esq,n) || search_tree(arv->no_dir,n)){
+          return arv;
+        }
+    }
+}
 
 int main(){
     No* arv;
     No* subarv;
+    No* teste;
 
     arv = inicializa();
     subarv = inicializa();
@@ -158,5 +170,8 @@ int main(){
     printf("\n\n");
     printf("\nResultado da busca da Sub-arvore na Arvore (Existe 1 | Nao 0) \n");
     printf("%d",search_sub_tree(arv,subarv));
+    
+    printf("\n\n");
+  
 
 }
