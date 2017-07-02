@@ -130,28 +130,50 @@ No* insert_qlq_no(No* arv,int n){
 
 int arvores_iguais(No* arv1, No* arv2){
   
-  if(arv1 == NULL && arv2 == NULL ){
+  if(arv1 == NULL && arv2 == NULL) return 1;
+  
+  if(arv1 == NULL || arv2 == NULL ){
     return 0;
   }
   else{
-    return( (arv1->n == arv2->n) && (arvores_iguais(arv1->no_esq,arv1->no_esq)) && (arvores_iguais(arv1->no_dir,arv1->no_dir)) );
+    return((arv1->n == arv2->n) && arvores_iguais(arv1->no_esq,arv2->no_esq) && arvores_iguais(arv1->no_dir,arv2->no_dir));
   } 
-  
 }
 
+static int cont = 0;
+  
+int qnts_arvores(No* arv, No* subarv){
+  
+  if(arv == NULL){
+    return 0;
+  }
+
+  if(arvores_iguais(arv,subarv) == 1){
+    cont++;
+  }
+  
+  return(qnts_arvores(arv->no_esq,subarv) && qnts_arvores(arv->no_dir,subarv));
+}
 
 int main(){
-    No* arv;
+    No *arv, *arv2;
     No* subarv;
-    No* teste;
 
     arv = inicializa();
+    arv2 = inicializa();
     subarv = inicializa();
+    
     arv = insert_tree(arv,8);
     arv = insert_tree(arv,5);
     arv = insert_tree(arv,12);
     arv = insert_tree(arv,23);
     arv = insert_tree(arv,11);
+    
+    arv2 = insert_tree(arv2,8);
+    arv2 = insert_tree(arv2,5);
+    arv2 = insert_tree(arv2,12);
+    arv2 = insert_tree(arv2,23);
+    arv2 = insert_tree(arv2,11);
     
     subarv = insert_tree(subarv,12);
     subarv = insert_tree(subarv,11);
@@ -160,11 +182,9 @@ int main(){
     printf("\n\n######### MyArvore ########\n");
     printf("\nPre-Ordem\n");
     print_pre(arv);
-    printf("\n");
-    printf("Pos-Ordem\n");
+    printf("\nPos-Ordem\n");
     print_pos(arv);
-    printf("\n");
-    printf("In-Ordem\n");
+    printf("\nIn-Ordem\n");
     print_in(arv);
     printf("\n\n");
     printf("\nResultado da busca (Existe 1 | Nao 0) \n");
@@ -173,17 +193,20 @@ int main(){
     printf("\n\n######### Sub-Arvore ########\n");
     printf("\nPre-Ordem\n");
     print_pre(subarv);
-    printf("\n");
-    printf("Pos-Ordem\n");
+    printf("\nPos-Ordem\n");
     print_pos(subarv);
-    printf("\n");
-    printf("In-Ordem\n");
+    printf("\nIn-Ordem\n");
     print_in(subarv);
     printf("\n\n");
     printf("\nResultado da busca da Sub-arvore na Arvore (Existe 1 | Nao 0) \n");
     printf("%d",search_sub_tree(arv,subarv));
     
+    printf("\nArvores sao iguais ? (Sim 1 | Nao 0) \n");
+    printf("%d\n", arvores_iguais(arv,arv2));
+    qnts_arvores(arv,subarv);
+    printf("%d", cont);
     printf("\n\n");
   
 
+}
 }
