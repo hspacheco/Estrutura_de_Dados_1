@@ -143,8 +143,8 @@ int arvores_iguais(No* arv1, No* arv2){
 static int cont = 0;
   
 int qnts_arvores(No* arv, No* subarv){
-  
-  if(arv == NULL){
+
+  if(arv->no_esq == NULL && arv->no_dir==NULL){
     return 0;
   }
 
@@ -152,16 +152,17 @@ int qnts_arvores(No* arv, No* subarv){
     cont++;
   }
   
-  return(qnts_arvores(arv->no_esq,subarv) && qnts_arvores(arv->no_dir,subarv));
+  return(qnts_arvores(arv->no_esq,subarv) || qnts_arvores(arv->no_dir,subarv));
 }
 
 int main(){
-    No *arv, *arv2;
+    No *arv, *arv2,*teste;
     No* subarv;
 
     arv = inicializa();
     arv2 = inicializa();
     subarv = inicializa();
+    teste = inicializa();
     
     arv = insert_tree(arv,8);
     arv = insert_tree(arv,5);
@@ -178,6 +179,10 @@ int main(){
     subarv = insert_tree(subarv,12);
     subarv = insert_tree(subarv,11);
     subarv = insert_tree(subarv,23);
+
+    teste = insert_tree(teste,12);
+    teste = insert_tree(teste,11);
+    teste = insert_tree(teste,23);
 
     printf("\n\n######### MyArvore ########\n");
     printf("\nPre-Ordem\n");
@@ -203,10 +208,25 @@ int main(){
     
     printf("\nArvores sao iguais ? (Sim 1 | Nao 0) \n");
     printf("%d\n", arvores_iguais(arv,arv2));
+    
+    printf("\n\n######### Nova Arvore ########\n");
+    arv->no_esq = teste;
+    printf("\nPre-Ordem\n");
+    print_pre(arv);
+    printf("\nPos-Ordem\n");
+    print_pos(arv);
+    printf("\nIn-Ordem\n");
+    print_in(arv);
+    printf("\n\n");
+    
+    
+    printf("\nArvores sao iguais ? (Sim 1 | Nao 0) \n");
+    printf("%d\n", arvores_iguais(arv,arv2));
+    
     qnts_arvores(arv,subarv);
+    printf("Quantas Sub-Arvores existem na Arvore principal ?\n");
     printf("%d", cont);
     printf("\n\n");
   
 
-}
 }
